@@ -1,8 +1,8 @@
 // // Create a search button
-// var $searchButton = $("#search-button");
-// $searchButton.on("click", printSearch);
+var $searchButton = $("#search-button");
+$searchButton.on("click", printSearch);
 var $cardsBody = $("#cards-body");
-var anime = "hunterxhunter";
+var anime;
 
 // Create a function that will fetch the API data from Jikan
 
@@ -35,6 +35,8 @@ function searchAnime() {
 
 searchAnime();
 
+addEventListener('click')
+
 // Create a function that displays 6 anime suggestions
 
 // Included in the suggestion card:
@@ -47,6 +49,8 @@ searchAnime();
 // sypnoisis
 // title
 
-// function printSearch(){
-
-// }
+$searchButton.on("click", printSearch);
+function printSearch(){
+  var userInput = $("#user-input")
+  anime.text(userInput) 
+}
