@@ -1,7 +1,7 @@
 // // Create a search button
 // var $searchButton = $("#search-button");
 // $searchButton.on("click", printSearch);
-
+var $cardsBody = $("#cards-body");
 var anime = "hunterxhunter";
 
 // Create a function that will fetch the API data from Jikan
@@ -16,10 +16,20 @@ function searchAnime() {
     .then(function (data) {
       console.log(data);
       var title = data.data[0].title_english;
-      // var sypnoisis =
-      // var poster =
+      var synopsis = data.data[1].synopsis;
+      var poster = data.data[1].images.jpg.large_image_url;
+      
 
-      console.log(title);
+      var imageEl = $("<img>");
+      var titleEl = $("<h1>");
+      var synopsisEl = $("<p>");
+
+      titleEl.text(title);
+      synopsisEl.text(synopsis);
+      imageEl.attr("src", poster)
+
+      $cardsBody.append(imageEl, titleEl, synopsisEl);
+
     });
 }
 
