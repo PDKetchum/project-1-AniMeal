@@ -1,6 +1,7 @@
 // // Create a search button
 var $searchButton = $("#search-button");
 var $cardsBody = $("#cards-body");
+var $userInputEl = $("#user-input");
 var anime;
 
 // Create a function that will fetch the API data from Jikan
@@ -10,7 +11,6 @@ var anime;
 // sypnoisis
 // title
 
-// to do: creat a function that will replace spaces in search to -
 function searchAnime() {
   var url = "https://api.jikan.moe/v4/anime?q=" + anime;
   console.log(url);
@@ -24,6 +24,7 @@ function searchAnime() {
       var title = data.data[0].title_english;
       var synopsis = data.data[0].synopsis;
       var poster = data.data[0].images.jpg.large_image_url;
+      $cardsBody.empty();
 
       var imageEl = $("<img>");
       var titleEl = $("<h1>");
@@ -39,9 +40,12 @@ function searchAnime() {
 
 $searchButton.on("click", printSearch);
 function printSearch() {
-  var userInput = $("#user-input");
-  anime = userInput.val();
+  replaceSpace();
   searchAnime();
+}
+
+function replaceSpace() {
+  anime = $userInputEl.val().replace(" ", "-");
 }
 
 // Create a function that displays 6 anime suggestions
