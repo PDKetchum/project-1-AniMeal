@@ -72,3 +72,28 @@ function displaySuggestion() {
 // target the data info needed
 // create elements for the recipie data to append to
 // append the recipe to html body
+
+function randomRecipe() {
+  var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+  console.log(mealUrl);
+
+  fetch(mealUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var mealTitle = data.meals[0].strMeal;
+      var instructions = data.meals[0].strInstructions;
+      console.log(data.meals[0])
+      for (var i = 1; i <= 20; i++){
+        var ingredients = "strIngredient" + i
+        
+// This gets rid of any empty sting/'null'
+        if (data.meals[0][ingredients] != null && data.meals[0][ingredients].length != 0) {
+          console.log(data.meals[0][ingredients])
+        }
+      }
+    })
+  }
+  randomRecipe()
