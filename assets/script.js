@@ -11,6 +11,8 @@ var anime;
 // sypnoisis
 // title
 
+// https://www.themealdb.com/api.php
+
 function searchAnime() {
   var url = "https://api.jikan.moe/v4/anime?q=" + anime;
   console.log(url);
@@ -44,8 +46,19 @@ function printSearch() {
   searchAnime();
 }
 
+$userInputEl.keydown(function(evt) {
+  if(evt.keyCode === 13) {
+    printSearch()
+  }
+})
+
+
 function replaceSpace() {
   anime = $userInputEl.val().replace(" ", "-");
+}
+
+function displaySuggestion() {
+  fetch()
 }
 
 // Create a function that displays 6 anime suggestions
