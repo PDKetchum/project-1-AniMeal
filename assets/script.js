@@ -138,7 +138,6 @@ function randomRecipe() {
 
       $recipeBody.append(mealImgEl, mealEl, instructions);
 
-
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
       var mealImg = data.meals[0].strMealThumb;
@@ -167,9 +166,6 @@ function randomRecipe() {
 
 function displayRecipe() {}
 
-      console.log(recipe);
-    });
-}
 // Create a function that will store recent saves
 function savePastSearches(anime) {
   var search = anime;
@@ -180,7 +176,9 @@ function savePastSearches(anime) {
     searches = [];
   }
 
-  searches.push(search);
+  if (!searches.includes(search)) {
+    searches.push(search);
+  }
 
   localStorage.setItem("searches", JSON.stringify(searches));
 }
