@@ -100,7 +100,7 @@ function displaySuggestions() {
 // append the recipe to html body
 
 // add image of random recipe
-// add measurement for loop
+// create array for ingredients and measure
 // concat inredients and measuments
 
 function randomRecipe() {
@@ -128,7 +128,7 @@ function randomRecipe() {
       }
       for (var i = 1; i <= 20; i++) {
         var measure = "strMeasure" + i;
-
+        // This gets rid of any empty sting/'null'
         if (
           data.meals[0][measure] != null &&
           data.meals[0][measure].length != 0
