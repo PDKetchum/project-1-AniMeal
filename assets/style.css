@@ -1,70 +1,74 @@
 body {
-    color: black;
-    border: 5px solid black;
+  color: black;
+  border: 5px solid black;
 }
 
 header {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    text-align: center;
-    border: 5px dashed blue;
-    margin: 10px;
-    font-size: xx-large;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  text-align: center;
+  border: 5px dashed blue;
+  margin: 10px;
+  font-size: xx-large;
 }
 
-h1, p, .search {
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+h1,
+p,
+.search {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
-input, button {
-    margin-bottom: 20px;
-    border: 1px solid black;
+input,
+button {
+  margin-bottom: 20px;
+  border: 1px solid black;
 }
 
 img {
-    grid-column: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 22px;
-    border: 5px solid red;
-    height: 440px;
-    width: 320px;
+  grid-column: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 22px;
+  border: 5px solid red;
+  height: 440px;
+  width: 320px;
 }
 
 .recipe-list {
-    font-size: larger;
-    font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
 }
+/*testing drop down*/
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: crimson;
+/* ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: crimson;
 }
 
 li {
-    float: left;
+  float: left;
 }
 
 li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 li a:hover {
-    background-color: rgb(83, 6, 22);
-}
+  background-color: rgb(83, 6, 22);
+} */
 
 footer {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  text-align: center;
 }

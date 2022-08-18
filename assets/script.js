@@ -3,6 +3,8 @@ var $searchButton = $("#search-button");
 var $animeCardBody = $("#anime-card-body");
 var $recipeBody = $("#recipe-body");
 var $userInputEl = $("#user-input");
+var $errorModal = $("#errorModal");
+var $span = $(".close");
 var anime;
 
 // Create a function that will fetch the API data from Jikan
@@ -26,20 +28,24 @@ function searchAnime(anime) {
     })
     .then(function (data) {
       console.log(data);
-      $animeCardBody.empty();
-      var title = data.data[0].title_english;
-      var synopsis = data.data[0].synopsis;
-      var poster = data.data[0].images.jpg.large_image_url;
+      if (data.data.length === 0) {
+        animeTitleError();
+      } else {
+        $animeCardBody.empty();
+        var title = data.data[0].title_english;
+        var synopsis = data.data[0].synopsis;
+        var poster = data.data[0].images.jpg.large_image_url;
 
-      var imageEl = $("<img>");
-      var titleEl = $("<h3>");
-      var synopsisEl = $("<p>");
+        var imageEl = $("<img>");
+        var titleEl = $("<h3>");
+        var synopsisEl = $("<p>");
 
-      titleEl.text(title);
-      synopsisEl.text(synopsis);
-      imageEl.attr("src", poster);
+        titleEl.text(title);
+        synopsisEl.text(synopsis);
+        imageEl.attr("src", poster);
 
-      $animeCardBody.append(imageEl, titleEl, synopsisEl);
+        $animeCardBody.append(imageEl, titleEl, synopsisEl);
+      }
     });
 }
 
@@ -105,47 +111,44 @@ function displaySuggestions() {
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
-  
+
   fetch(mealUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    var mealTitle = data.meals[0].strMeal;
-    var instructions = data.meals[0].strInstructions;
-    var mealImg = data.meals[0].strMealThumb;
-    // Array is here to store locally every time
-    var recipe = []
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var mealTitle = data.meals[0].strMeal;
+      var instructions = data.meals[0].strInstructions;
+      var mealImg = data.meals[0].strMealThumb;
+      // Array is here to store locally every time
+      var recipe = [];
 
       console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
-          var measure = "strMeasure" + i;
-          var meal = data.meals[0]
+        var measure = "strMeasure" + i;
+        var meal = data.meals[0];
 
         // This gets rid of any empty sting/'null'
-        if (
-          meal[ingredients] != null &&
-          meal[ingredients].length != 0
-        ) {
-          console.log(meal[ingredients],meal[measure]);
+        if (meal[ingredients] != null && meal[ingredients].length != 0) {
+          console.log(meal[ingredients], meal[measure]);
           recipe.push({
             ingredient: meal[ingredients],
             measure: meal[measure],
-          })
+          });
         }
       }
 
-      console.log(recipe)
-
+      console.log(recipe);
+    });
+}
 // Create a function that will store recent saves
-function saveRecentSearches(anime) {
-  var recentSearch = anime.toUpperCase();
-  var recentSearches = localStorage.getItem("RecentSearches");
-  if (recentSearches) {
-    recentSearches = JSON.parse(recentSearches);
-
+function savePastSearches(anime) {
+  var search = anime;
+  var searches = localStorage.getItem("searches");
+  if (searches) {
+    searches = JSON.parse(searches);
   } else {
     searches = [];
   }
@@ -168,4 +171,16 @@ function displayPastSearches() {
 }
 
 displayPastSearches();
-
+// comment
+function animeTitleError() {
+  $(function () {
+    $("#dialog-message").dialog({
+      modal: true,
+      buttons: {
+        Ok: function () {
+          $(this).dialog("close");
+        },
+      },
+    });
+  });
+}

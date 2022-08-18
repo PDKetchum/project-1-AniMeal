@@ -4,17 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.2/themes/black-tie/jquery-ui.css"
     />
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
+    /> -->
     <link rel="stylesheet" href="./assets/style.css" />
     <title>AniMeal</title>
   </head>
@@ -29,9 +27,17 @@
       <input type="text" id="user-input" placeholder="Search.." />
       <button id="search-button">Search</button>
     </div>
-    <div class="flex flex-wrap justify-around" id="anime-card-body"></div>
-    <div id="recipe-body" class="recipe-list"></div>
+    <!--added modal-->
+    <div id="dialog-message" title="Oh no!">
+      <p>
+        <span style="float: left; margin: 0 7px 50px 0"></span>
+        Please enter a valid anime title.
+      </p>
+    </div>
   </body>
+  <div class="flex flex-wrap justify-around" id="anime-card-body"></div>
+  <div id="recipe-body" class="recipe-list"></div>
+
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script src="./assets/script.js"></script>
