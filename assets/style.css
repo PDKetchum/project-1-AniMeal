@@ -1,12 +1,15 @@
 body {
-    background-color: white
+    color: black;
+    border: 5px solid black;
 }
 
 header {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 75px;
     color: black;
     text-align: center;
+    border: 5px dashed blue;
+    margin: 10px;
+    font-size: xx-large;
 }
 
 h1, p, .search {
@@ -15,11 +18,25 @@ h1, p, .search {
     text-align: center;
 }
 
+input, button {
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
+
 img {
+    grid-column: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding-top: 22px;
+    border: 5px solid red;
+    height: 440px;
+    width: 320px;
+}
+
+.recipe-list {
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 ul {
