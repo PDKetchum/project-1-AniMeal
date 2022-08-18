@@ -32,7 +32,7 @@ function searchAnime(anime) {
       var poster = data.data[0].images.jpg.large_image_url;
 
       var imageEl = $("<img>");
-      var titleEl = $("<h1>");
+      var titleEl = $("<h3>");
       var synopsisEl = $("<p>");
 
       titleEl.text(title);
@@ -83,7 +83,7 @@ function displaySuggestions() {
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
         var suggestionImageEl = $("<img>");
-        var suggestionTitleEl = $("<h1>");
+        var suggestionTitleEl = $("<h3>");
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
@@ -138,8 +138,6 @@ function randomRecipe() {
           console.log(data.meals[0][measure]);
         }
       }
-    });
-}
 
 // Create a function that will store recent saves
 function saveRecentSearches(anime) {
