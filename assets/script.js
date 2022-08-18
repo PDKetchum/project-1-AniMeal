@@ -46,7 +46,7 @@ function searchAnime(anime) {
 $searchButton.on("click", printSearch);
 function printSearch() {
   replaceCharacters();
-  searchAnime();
+  searchAnime(anime);
   randomRecipe();
 }
 
@@ -116,19 +116,6 @@ function randomRecipe() {
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
 
-      console.log(data.meals[0])
-      for (var i = 1; i <= 20; i++){
-        var ingredients = "strIngredient" + i
-        
-// This gets rid of any empty sting/'null'
-        if (data.meals[0][ingredients] != null && data.meals[0][ingredients].length != 0) {
-          console.log(data.meals[0][ingredients])
-        }
-      }
-    })
-  }
-  randomRecipe()
-
       console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
@@ -150,6 +137,44 @@ function randomRecipe() {
         ) {
           console.log(data.meals[0][measure]);
         }
-    }});
+      }
+    });
+}
+
+// Create a function that will store recent saves
+function saveRecentSearches(anime) {
+  var recentSearch = anime.toUpperCase();
+  var recentSearches = localStorage.getItem("RecentSearches");
+  if (recentSearches) {
+    recentSearches = JSON.parse(recentSearches);
+  } else {
+    recentSearches = [];
+  }
+
+  recentSearches.push(recentSearch);
+
+  localStorage.setItem("RecentSearches", JSON.stringify(recentSearches));
+}
+
+// Create a function that will display recent searches when clicking in the textbox
+function displayRecentSearches() {
+  var searches = JSON.parse(localStorage.getItem("RecentSearches"));
+  var counter = 0;
+  // $("#").empty();
+  for (var i = searches.length - 1; i >= 0; i--) {
+    if (counter === 5) {
+      return;
+    } else {
+      counter++;
+    }
+  }
+}
+
+// Create a function that will navigate the user to the anime when clicking a recent search
+function openRecentSearch(event) {
+  var animeClicked = event.target.innerText;
+  replaceCharacters(animeClicked);
+  searchAnime(animeClicked);
+  randomRecipe();
 }
 
