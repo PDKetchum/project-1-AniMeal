@@ -101,52 +101,51 @@ function displaySuggestions() {
 // append the recipe to html body
 
 // add image of random recipe
-// create array for ingredients and measure
-// concat inredients and measuments
 
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
-
+  
   fetch(mealUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      var mealTitle = data.meals[0].strMeal;
-      var instructions = data.meals[0].strInstructions;
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    var mealTitle = data.meals[0].strMeal;
+    var instructions = data.meals[0].strInstructions;
+    var mealImg = data.meals[0].strMealThumb;
+    // Array is here to store locally every time
+    var recipe = []
 
       console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
+          var measure = "strMeasure" + i;
+          var meal = data.meals[0]
 
         // This gets rid of any empty sting/'null'
         if (
-          data.meals[0][ingredients] != null &&
-          data.meals[0][ingredients].length != 0
+          meal[ingredients] != null &&
+          meal[ingredients].length != 0
         ) {
-          console.log(data.meals[0][ingredients]);
+          console.log(meal[ingredients],meal[measure]);
+          recipe.push({
+            ingredient: meal[ingredients],
+            measure: meal[measure],
+          })
         }
       }
-      for (var i = 1; i <= 20; i++) {
-        var measure = "strMeasure" + i;
-        // This gets rid of any empty sting/'null'
-        if (
-          data.meals[0][measure] != null &&
-          data.meals[0][measure].length != 0
-        ) {
-          console.log(data.meals[0][measure]);
-        }
-      }
-    });
-}
-// Create a function that will store searches
-function savePastSearches(anime) {
-  var search = anime;
-  var searches = localStorage.getItem("searches");
-  if (searches) {
-    searches = JSON.parse(searches);
+
+      console.log(recipe)
+
+// Create a function that will store recent saves
+function saveRecentSearches(anime) {
+  var recentSearch = anime.toUpperCase();
+  var recentSearches = localStorage.getItem("RecentSearches");
+  if (recentSearches) {
+    recentSearches = JSON.parse(recentSearches);
+
   } else {
     searches = [];
   }
@@ -167,4 +166,6 @@ function displayPastSearches() {
     });
   });
 }
+
 displayPastSearches();
+
