@@ -46,7 +46,7 @@ function searchAnime(anime) {
 $searchButton.on("click", printSearch);
 function printSearch() {
   replaceCharacters();
-  searchAnime();
+  searchAnime(anime);
   randomRecipe();
 }
 
@@ -144,7 +144,7 @@ function saveRecentSearches(anime) {
 function displayRecentSearches() {
   var searches = JSON.parse(localStorage.getItem("RecentSearches"));
   var counter = 0;
-  $("#recent-searches-list").empty();
+  // $("#").empty();
   for (var i = searches.length - 1; i >= 0; i--) {
     if (counter === 5) {
       return;
@@ -157,5 +157,7 @@ function displayRecentSearches() {
 // Create a function that will navigate the user to the anime when clicking a recent search
 function openRecentSearch(event) {
   var animeClicked = event.target.innerText;
+  replaceCharacters(animeClicked);
   searchAnime(animeClicked);
+  randomRecipe();
 }
