@@ -85,7 +85,7 @@ function displaySuggestions() {
       console.log(data);
       $animeCardBody.empty();
 
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 10; i++) {
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 

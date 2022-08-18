@@ -1,21 +1,24 @@
 body {
-  color: black;
+  background-color: rgb(58, 58, 58);
   border: 5px solid black;
 }
 
 header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: black;
+  color: white;
   text-align: center;
-  border: 5px dashed blue;
+  border: 5px dashed rgb(47, 154, 255);
   margin: 10px;
   font-size: xx-large;
 }
 
-h1,
+h3,
 p,
 .search {
-  color: black;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
@@ -27,20 +30,31 @@ button {
 }
 
 img {
-  grid-column: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 22px;
   border: 5px solid red;
-  height: 440px;
-  width: 320px;
+  height: 544px;
+  width: 354px;
 }
 
 .recipe-list {
   font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+li {
+  display: contents;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+}
+
 /*testing drop down*/
 
 /* ul {
@@ -69,6 +83,6 @@ li a:hover {
 
 footer {
   font-family: Arial, Helvetica, sans-serif;
-  color: black;
   text-align: center;
+  color: white;
 }
