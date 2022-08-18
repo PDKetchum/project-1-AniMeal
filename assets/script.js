@@ -99,6 +99,10 @@ function displaySuggestions() {
 // create elements for the recipie data to append to
 // append the recipe to html body
 
+// add image of random recipe
+// create array for ingredients and measure
+// concat inredients and measuments
+
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
@@ -121,8 +125,7 @@ function randomRecipe() {
           data.meals[0][ingredients] != null &&
           data.meals[0][ingredients].length != 0
         ) {
-          ingredientsEl = data.meals[0][ingredients];
-          $recipeBody.append(ingredientsEl);
+          console.log(data.meals[0][ingredients]);
         }
       }
       for (var i = 1; i <= 20; i++) {
@@ -174,3 +177,4 @@ function openRecentSearch(event) {
   searchAnime(animeClicked);
   randomRecipe();
 }
+
