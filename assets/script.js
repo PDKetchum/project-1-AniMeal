@@ -148,16 +148,13 @@ function randomRecipe() {
           });
         }
       }
-<<<<<<< HEAD
       console.log(recipe);
     });
 }
 
 function displayRecipe() {}
-=======
 
       console.log(recipe)
->>>>>>> 10df2fe6c7ecb32b5b5764a291ac581743ca69f0
 
 // Create a function that will store recent saves
 function saveRecentSearches(anime) {
