@@ -48,6 +48,7 @@ function printSearch() {
   replaceCharacters();
   searchAnime(anime);
   randomRecipe();
+  savePastSearches(anime);
 }
 
 $userInputEl.keydown(function (evt) {
@@ -138,41 +139,32 @@ function randomRecipe() {
           console.log(data.meals[0][measure]);
         }
       }
-
-// Create a function that will store recent saves
-function saveRecentSearches(anime) {
-  var recentSearch = anime.toUpperCase();
-  var recentSearches = localStorage.getItem("RecentSearches");
-  if (recentSearches) {
-    recentSearches = JSON.parse(recentSearches);
+    });
+}
+// Create a function that will store searches
+function savePastSearches(anime) {
+  var search = anime;
+  var searches = localStorage.getItem("searches");
+  if (searches) {
+    searches = JSON.parse(searches);
   } else {
-    recentSearches = [];
+    searches = [];
   }
 
-  recentSearches.push(recentSearch);
+  searches.push(search);
 
-  localStorage.setItem("RecentSearches", JSON.stringify(recentSearches));
+  localStorage.setItem("searches", JSON.stringify(searches));
 }
 
-// Create a function that will display recent searches when clicking in the textbox
-function displayRecentSearches() {
-  var searches = JSON.parse(localStorage.getItem("RecentSearches"));
-  var counter = 0;
-  // $("#").empty();
-  for (var i = searches.length - 1; i >= 0; i--) {
-    if (counter === 5) {
-      return;
-    } else {
-      counter++;
-    }
-  }
+// Create a function that will display recent searches when typing in the search bar
+function displayPastSearches() {
+  var pastSearches = JSON.parse(localStorage.getItem("searches"));
+  $("#user-input").empty;
+  $(function () {
+    var availableTags = pastSearches;
+    $("#user-input").autocomplete({
+      source: availableTags,
+    });
+  });
 }
-
-// Create a function that will navigate the user to the anime when clicking a recent search
-function openRecentSearch(event) {
-  var animeClicked = event.target.innerText;
-  replaceCharacters(animeClicked);
-  searchAnime(animeClicked);
-  randomRecipe();
-}
-
+displayPastSearches();
