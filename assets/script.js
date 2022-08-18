@@ -1,10 +1,14 @@
 // // Create a search button
 var $searchButton = $("#search-button");
 var $animeCardBody = $("#anime-card-body");
-var $recipeBody = $("#recipe-body");
 var $userInputEl = $("#user-input");
+var $recipeBody = $("#recipe-body");
+var $recipeList = $("#recipe-list");
+var $recipeImg = $("#recipe-img");
+var $recipeName = $("#recipe-name");
 var $errorModal = $("#errorModal");
 var $span = $(".close");
+
 var anime;
 
 // Create a function that will fetch the API data from Jikan
@@ -118,9 +122,27 @@ function randomRecipe() {
     })
     .then(function (data) {
       console.log(data);
+
+      $recipeBody.empty();
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
       var mealImg = data.meals[0].strMealThumb;
+
+      var mealImgEl = $("<img>");
+      var instrEl = $("<p>");
+      var mealEl = $("<h1>");
+
+      mealEl.text(mealTitle);
+      instrEl.text(instructions);
+      mealImgEl.attr("src", mealImg);
+
+      $recipeBody.append(mealImgEl, mealEl, instructions);
+
+
+      var mealTitle = data.meals[0].strMeal;
+      var instructions = data.meals[0].strInstructions;
+      var mealImg = data.meals[0].strMealThumb;
+
       // Array is here to store locally every time
       var recipe = [];
 
@@ -139,6 +161,11 @@ function randomRecipe() {
           });
         }
       }
+      console.log(recipe);
+    });
+}
+
+function displayRecipe() {}
 
       console.log(recipe);
     });
