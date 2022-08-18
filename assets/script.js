@@ -171,7 +171,7 @@ function displayPastSearches() {
 }
 
 displayPastSearches();
-
+// comment
 function animeTitleError() {
   $(function () {
     $("#dialog-message").dialog({
