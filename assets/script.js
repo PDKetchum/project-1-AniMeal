@@ -35,7 +35,7 @@ function searchAnime(anime) {
       var poster = data.data[0].images.jpg.large_image_url;
 
       var imageEl = $("<img>");
-      var titleEl = $("<h1>");
+      var titleEl = $("<h3>");
       var synopsisEl = $("<p>");
 
       titleEl.text(title);
@@ -51,6 +51,7 @@ function printSearch() {
   replaceCharacters();
   searchAnime(anime);
   randomRecipe();
+  savePastSearches(anime);
 }
 
 $userInputEl.keydown(function (evt) {
@@ -86,7 +87,7 @@ function displaySuggestions() {
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
         var suggestionImageEl = $("<img>");
-        var suggestionTitleEl = $("<h1>");
+        var suggestionTitleEl = $("<h3>");
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
@@ -147,11 +148,16 @@ function randomRecipe() {
           });
         }
       }
+<<<<<<< HEAD
       console.log(recipe);
     });
 }
 
 function displayRecipe() {}
+=======
+
+      console.log(recipe)
+>>>>>>> 10df2fe6c7ecb32b5b5764a291ac581743ca69f0
 
 // Create a function that will store recent saves
 function saveRecentSearches(anime) {
@@ -159,33 +165,27 @@ function saveRecentSearches(anime) {
   var recentSearches = localStorage.getItem("RecentSearches");
   if (recentSearches) {
     recentSearches = JSON.parse(recentSearches);
+
   } else {
-    recentSearches = [];
+    searches = [];
   }
 
-  recentSearches.push(recentSearch);
+  searches.push(search);
 
-  localStorage.setItem("RecentSearches", JSON.stringify(recentSearches));
+  localStorage.setItem("searches", JSON.stringify(searches));
 }
 
-// Create a function that will display recent searches when clicking in the textbox
-function displayRecentSearches() {
-  var searches = JSON.parse(localStorage.getItem("RecentSearches"));
-  var counter = 0;
-  // $("#").empty();
-  for (var i = searches.length - 1; i >= 0; i--) {
-    if (counter === 5) {
-      return;
-    } else {
-      counter++;
-    }
-  }
+// Create a function that will display recent searches when typing in the search bar
+function displayPastSearches() {
+  var pastSearches = JSON.parse(localStorage.getItem("searches"));
+  $("#user-input").empty;
+  $(function () {
+    var availableTags = pastSearches;
+    $("#user-input").autocomplete({
+      source: availableTags,
+    });
+  });
 }
 
-// Create a function that will navigate the user to the anime when clicking a recent search
-function openRecentSearch(event) {
-  var animeClicked = event.target.innerText;
-  replaceCharacters(animeClicked);
-  searchAnime(animeClicked);
-  randomRecipe();
-}
+displayPastSearches();
+
