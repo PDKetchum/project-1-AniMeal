@@ -32,7 +32,7 @@ function searchAnime(anime) {
       var poster = data.data[0].images.jpg.large_image_url;
 
       var imageEl = $("<img>");
-      var titleEl = $("<h1>");
+      var titleEl = $("<h3>");
       var synopsisEl = $("<p>");
 
       titleEl.text(title);
@@ -84,7 +84,7 @@ function displaySuggestions() {
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
         var suggestionImageEl = $("<img>");
-        var suggestionTitleEl = $("<h1>");
+        var suggestionTitleEl = $("<h3>");
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
@@ -99,6 +99,10 @@ function displaySuggestions() {
 // target the data info needed
 // create elements for the recipie data to append to
 // append the recipe to html body
+
+// add image of random recipe
+// create array for ingredients and measure
+// concat inredients and measuments
 
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
@@ -122,8 +126,7 @@ function randomRecipe() {
           data.meals[0][ingredients] != null &&
           data.meals[0][ingredients].length != 0
         ) {
-          ingredientsEl = data.meals[0][ingredients];
-          $recipeBody.append(ingredientsEl);
+          console.log(data.meals[0][ingredients]);
         }
       }
       for (var i = 1; i <= 20; i++) {
@@ -138,7 +141,6 @@ function randomRecipe() {
       }
     });
 }
-
 // Create a function that will store searches
 function savePastSearches(anime) {
   var search = anime;

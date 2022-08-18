@@ -9,19 +9,28 @@
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.2/themes/black-tie/jquery-ui.css"
     />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>AniMeal</title>
   </head>
-  <header>AniMeal</header>
-  <h1>Clever Slogan</h1>
+
+  <header>
+    <h1>AniMeal</h1>
+    <h2>Clever Slogan</h2>
+  </header>
 
   <body>
     <div class="search">
       <input type="text" id="user-input" placeholder="Search.." />
       <button id="search-button">Search</button>
     </div>
-    <div id="anime-card-body"></div>
-    <div id="recipe-body"></div>
+    <div class="flex flex-wrap justify-around" id="anime-card-body"></div>
+    <div id="recipe-body" class="recipe-list"></div>
   </body>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
