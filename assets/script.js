@@ -112,22 +112,10 @@ function randomRecipe() {
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
 
-      console.log(data.meals[0])
-      for (var i = 1; i <= 20; i++){
-        var ingredients = "strIngredient" + i
-        
-// This gets rid of any empty sting/'null'
-        if (data.meals[0][ingredients] != null && data.meals[0][ingredients].length != 0) {
-          console.log(data.meals[0][ingredients])
-        }
-      }
-    })
-  }
-  randomRecipe()
-
       console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
+
         // This gets rid of any empty sting/'null'
         if (
           data.meals[0][ingredients] != null &&
@@ -135,6 +123,16 @@ function randomRecipe() {
         ) {
           ingredientsEl = data.meals[0][ingredients];
           $recipeBody.append(ingredientsEl);
+        }
+      }
+      for (var i = 1; i <= 20; i++) {
+        var measure = "strMeasure" + i;
+        // This gets rid of any empty sting/'null'
+        if (
+          data.meals[0][measure] != null &&
+          data.meals[0][measure].length != 0
+        ) {
+          console.log(data.meals[0][measure]);
         }
       }
     });
@@ -176,4 +174,3 @@ function openRecentSearch(event) {
   searchAnime(animeClicked);
   randomRecipe();
 }
-
