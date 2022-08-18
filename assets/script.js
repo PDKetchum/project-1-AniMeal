@@ -1,8 +1,11 @@
 // // Create a search button
 var $searchButton = $("#search-button");
 var $animeCardBody = $("#anime-card-body");
-var $recipeBody = $("#recipe-body");
 var $userInputEl = $("#user-input");
+var $recipeBody = $("#recipe-body");
+var $recipeList = $("#recipe-list");
+var $recipeImg = $("#recipe-img");
+var $recipeName = $("#recipe-name");
 var anime;
 
 // Create a function that will fetch the API data from Jikan
@@ -104,42 +107,51 @@ function displaySuggestions() {
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
-  
+
   fetch(mealUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    var mealTitle = data.meals[0].strMeal;
-    var instructions = data.meals[0].strInstructions;
-    var mealImg = data.meals[0].strMealThumb;
-    // Array is here to store locally every time
-    var recipe = []
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      $recipeBody.empty();
+      var mealTitle = data.meals[0].strMeal;
+      var instructions = data.meals[0].strInstructions;
+      var mealImg = data.meals[0].strMealThumb;
+
+      var mealImgEl = $("<img>");
+      var instrEl = $("<p>");
+      var mealEl = $("<h1>");
+
+      mealEl.text(mealTitle);
+      instrEl.text(instructions);
+      mealImgEl.attr("src", mealImg);
+
+      $recipeBody.append(mealImgEl, mealEl, instructions);
+
+      // Array is here to store locally every time
+      var recipe = [];
 
       console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
-          var measure = "strMeasure" + i;
-          var meal = data.meals[0]
+        var measure = "strMeasure" + i;
+        var meal = data.meals[0];
 
         // This gets rid of any empty sting/'null'
-        if (
-          meal[ingredients] != null &&
-          meal[ingredients].length != 0
-        ) {
-          console.log(meal[ingredients],meal[measure]);
+        if (meal[ingredients] != null && meal[ingredients].length != 0) {
+          console.log(meal[ingredients], meal[measure]);
           recipe.push({
             ingredient: meal[ingredients],
             measure: meal[measure],
-          })
+          });
         }
       }
-      console.log(recipe)
-
+      console.log(recipe);
     });
 }
 
+function displayRecipe() {}
 
 // Create a function that will store recent saves
 function saveRecentSearches(anime) {
