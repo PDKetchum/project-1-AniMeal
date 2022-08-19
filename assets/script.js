@@ -15,8 +15,6 @@ var anime;
 // sypnoisis
 // title
 
-// https://www.themealdb.com/api.php
-
 displaySuggestions();
 
 function searchAnime(anime) {
@@ -103,8 +101,7 @@ function displaySuggestions() {
 // create elements for the recipie data to append to
 // append the recipe to html body
 
-// add image of random recipe
-
+// This is technically done but could be better
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
@@ -127,6 +124,9 @@ function randomRecipe() {
       mealEl.text(mealTitle);
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
+      
+      // $recipeImg.empty();
+      // $recipeImg.append(mealImg);
 
       $recipeBody.append(mealImgEl, mealEl, instructions);
 
@@ -152,17 +152,12 @@ function randomRecipe() {
     });
 }
 
-function displayRecipe() {}
-
-      console.log(recipe)
-
 // Create a function that will store recent saves
 function saveRecentSearches(anime) {
   var recentSearch = anime.toUpperCase();
   var recentSearches = localStorage.getItem("RecentSearches");
   if (recentSearches) {
     recentSearches = JSON.parse(recentSearches);
-
   } else {
     searches = [];
   }
@@ -185,4 +180,3 @@ function displayPastSearches() {
 }
 
 displayPastSearches();
-
