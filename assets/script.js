@@ -10,8 +10,6 @@ var $recipeName = $("#recipe-name");
 var $errorModal = $("#errorModal");
 var $closeButton = $("#error-modal-close-button");
 
-var anime;
-
 // Create a function that will fetch the API data from Jikan
 // create a function that will display the search result
 // Included in the search card:
@@ -24,6 +22,11 @@ var anime;
 displaySuggestions();
 
 function searchAnime(anime) {
+  if (!anime) {
+    animeTitleError();
+    return;
+  }
+
   var animeUrl = "https://api.jikan.moe/v4/anime?q=" + anime;
   console.log(animeUrl);
 
@@ -51,7 +54,7 @@ function searchAnime(anime) {
 
         info.attr("class", "col-span-2");
         titleEl.attr("class", "font-bold text-4xl");
-        synopsisEl.attr("class", "text-3xl text-justify pr-12")
+        synopsisEl.attr("class", "text-3xl text-justify pr-12");
 
         titleEl.text(title);
         synopsisEl.text(synopsis);
@@ -63,15 +66,15 @@ function searchAnime(anime) {
 
         savePastSearches(anime);
         displayPastSearches();
+        randomRecipe();
       }
     });
 }
 
 $searchButton.on("click", printSearch);
 function printSearch() {
-  replaceCharacters();
+  var anime = replaceCharacters();
   searchAnime(anime);
-  randomRecipe();
 }
 
 $userInputEl.keydown(function (evt) {
@@ -81,7 +84,7 @@ $userInputEl.keydown(function (evt) {
 });
 
 function replaceCharacters(anime) {
-  anime = $userInputEl.val().replace(" ", "-");
+  return $userInputEl.val().replace(" ", "-");
 }
 
 // Create a function that displays 6 anime suggestions
@@ -110,7 +113,7 @@ function displaySuggestions() {
         var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
-        suggestionImageEl.attr("class", "")
+        suggestionImageEl.attr("class", "");
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
@@ -155,9 +158,11 @@ function randomRecipe() {
       var mealImg = data.meals[0].strMealThumb;
 
       var mealImgEl = $("<img>");
+      var recipeInfo = $("<div>");
       var instrEl = $("<p>");
       var mealEl = $("<h1>");
 
+      recipeInfo.attr("class", "col-span-2");
       mealEl.attr("class", "font-bold text-4xl");
       instrEl.attr("class", "text-3xl text-justify pr-12");
 
@@ -165,7 +170,8 @@ function randomRecipe() {
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
 
-      $recipeBody.append(mealImgEl, mealEl, instrEl);
+      recipeInfo.append(mealEl, instrEl);
+      $recipeBody.append(mealImgEl, recipeInfo);
 
       // Array is here to store locally every time
       var recipe = [];
