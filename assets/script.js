@@ -125,8 +125,6 @@ function randomRecipe() {
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
       
-      // $recipeImg.empty();
-      // $recipeImg.append(mealImg);
 
       $recipeBody.append(mealImgEl, mealEl, instructions);
 
