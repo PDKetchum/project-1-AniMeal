@@ -24,34 +24,33 @@
     <h1>AniMeal</h1>
     <h3>Where watching and eating couldn't be any easier</h3>
     <ul>
-      <li><a class="link" href="#">Home</a></li>
+      <li><a class="link" href="index.html">Home</a></li>
       <li><a class="link" href="#">Anime List</a></li>
       <li><a class="link" href="#">Food List</a></li>
     </ul>
   </header>
 
   <body>
-    <div class="search">
-      <input type="text" id="user-input" placeholder="Search.." />
-      <button id="search-button">Search</button>
-    </div>
+      <div class="search">
+        <input type="text" id="user-input" placeholder="Search.." />
+        <button id="search-button">Search</button>
+      </div>
 
-    <div id="anime-card-body"></div>
-    <div id="recipe-body">
+      <div id="anime-card-body"></div>
+      <div id="recipe-body">
+
       <div id="recipe-img"></div>
       <div id="recipe-list"></div>
       <div id="recipe-name"></div>
 
-    <!--added modal-->
-    <div id="dialog-message" title="Oh no!">
-      <p>
-        <span style="float: left; margin: 0 7px 50px 0"></span>
-        Please enter a valid anime title.
-      </p>
-    </div>
+      <!--added modal-->
+      <div id="dialog-message" title="Oh no!">
+        <p><span style="float: left; margin: 0 7px 50px 0"></span>Please enter a valid anime title.</p>
+      </div>  
+      <!-- <div class="flex flex-wrap grid grid-cols-5" id="anime-card-body"></div>
+      <div id="recipe-body" class="recipe-list"></div> -->
   </body>
-  <div class="flex flex-wrap" id="anime-card-body"></div>
-  <div id="recipe-body" class="recipe-list"></div>
+
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
