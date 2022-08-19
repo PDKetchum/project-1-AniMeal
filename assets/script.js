@@ -1,6 +1,7 @@
 // // Create a search button
 var $searchButton = $("#search-button");
-var $animeCardBody = $("#anime-card-body");
+var $animeCardBodySearch = $("#anime-card-body-search");
+var $animeCardBodySuggestions = $("#anime-card-body-suggestions");
 var $userInputEl = $("#user-input");
 var $recipeBody = $("#recipe-body");
 var $recipeList = $("#recipe-list");
@@ -35,22 +36,31 @@ function searchAnime(anime) {
       if (data.data.length === 0) {
         animeTitleError();
       } else {
-        $animeCardBody.empty();
+        $animeCardBodySuggestions.empty();
+        $animeCardBodySearch.empty();
+
         var title = data.data[0].title_english;
         var synopsis = data.data[0].synopsis;
         var poster = data.data[0].images.jpg.large_image_url;
 
+        var card = $("<div>");
+        var info = $("<div>");
         var imageEl = $("<img>");
         var titleEl = $("<h3>");
         var synopsisEl = $("<p>");
+
+        info.attr("class", "col-span-2");
 
         titleEl.text(title);
         synopsisEl.text(synopsis);
         imageEl.attr("src", poster);
 
-        $animeCardBody.append(imageEl, titleEl, synopsisEl);
+        info.append(titleEl, synopsisEl);
+        card.append(imageEl, info);
+        $animeCardBodySearch.append(card, info);
 
         savePastSearches(anime);
+        displayPastSearches();
       }
     });
 }
@@ -88,19 +98,21 @@ function displaySuggestions() {
     })
     .then(function (data) {
       console.log(data);
-      $animeCardBody.empty();
+      $animeCardBodySuggestions.empty();
 
       for (var i = 0; i < 10; i++) {
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
+        var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
 
-        $animeCardBody.append(suggestionImageEl, suggestionTitleEl);
+        suggestionCard.append(suggestionImageEl, suggestionTitleEl);
+        $animeCardBodySuggestions.append(suggestionCard);
       }
     });
 }
@@ -169,7 +181,7 @@ function displayRecipe() {}
 
 // Create a function that will store recent saves
 function savePastSearches(anime) {
-  var search = anime.toUpperCase();
+  var search = anime;
   var searches = localStorage.getItem("searches");
   if (searches) {
     searches = JSON.parse(searches);
@@ -187,8 +199,10 @@ function savePastSearches(anime) {
 // Create a function that will display recent searches when typing in the search bar
 function displayPastSearches() {
   var pastSearches = JSON.parse(localStorage.getItem("searches"));
+  console.log(pastSearches);
   $("#user-input").empty;
   $(function () {
+    console.log("inside");
     var availableTags = pastSearches;
     $("#user-input").autocomplete({
       source: availableTags,
