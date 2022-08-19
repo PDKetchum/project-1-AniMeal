@@ -18,7 +18,7 @@ header {
 h3,
 p,
 .search {
-  color: white;
+  color: black;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
@@ -85,4 +85,12 @@ footer {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   color: white;
+}
+
+.errorModalShow {
+  display: block;
+}
+
+.errorModalHide {
+  display: none;
 }
