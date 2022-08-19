@@ -7,7 +7,7 @@ var $recipeList = $("#recipe-list");
 var $recipeImg = $("#recipe-img");
 var $recipeName = $("#recipe-name");
 var $errorModal = $("#errorModal");
-var $span = $(".close");
+var $closeButton = $("#error-modal-close-button");
 
 var anime;
 
@@ -49,6 +49,8 @@ function searchAnime(anime) {
         imageEl.attr("src", poster);
 
         $animeCardBody.append(imageEl, titleEl, synopsisEl);
+
+        savePastSearches(anime);
       }
     });
 }
@@ -58,7 +60,6 @@ function printSearch() {
   replaceCharacters();
   searchAnime(anime);
   randomRecipe();
-  savePastSearches(anime);
 }
 
 $userInputEl.keydown(function (evt) {
@@ -168,7 +169,7 @@ function displayRecipe() {}
 
 // Create a function that will store recent saves
 function savePastSearches(anime) {
-  var search = anime;
+  var search = anime.toUpperCase();
   var searches = localStorage.getItem("searches");
   if (searches) {
     searches = JSON.parse(searches);
@@ -198,14 +199,11 @@ function displayPastSearches() {
 displayPastSearches();
 // comment
 function animeTitleError() {
-  $(function () {
-    $("#dialog-message").dialog({
-      modal: true,
-      buttons: {
-        Ok: function () {
-          $(this).dialog("close");
-        },
-      },
-    });
-  });
+  $errorModal.attr("class", "errorModalShow");
+}
+
+$closeButton.on("click", hideModal);
+
+function hideModal() {
+  $errorModal.attr("class", "errorModalHide");
 }
