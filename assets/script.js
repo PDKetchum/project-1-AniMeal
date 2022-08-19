@@ -50,6 +50,8 @@ function searchAnime(anime) {
         var synopsisEl = $("<p>");
 
         info.attr("class", "col-span-2");
+        titleEl.attr("class", "font-bold text-4xl");
+        synopsisEl.attr("class", "text-3xl text-justify pr-12")
 
         titleEl.text(title);
         synopsisEl.text(synopsis);
@@ -108,6 +110,7 @@ function displaySuggestions() {
         var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
+        suggestionImageEl.attr("class", "")
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
@@ -155,15 +158,14 @@ function randomRecipe() {
       var instrEl = $("<p>");
       var mealEl = $("<h1>");
 
+      mealEl.attr("class", "font-bold text-4xl");
+      instrEl.attr("class", "text-3xl text-justify pr-12");
+
       mealEl.text(mealTitle);
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
 
-      $recipeBody.append(mealImgEl, mealEl, instructions);
-
-      var mealTitle = data.meals[0].strMeal;
-      var instructions = data.meals[0].strInstructions;
-      var mealImg = data.meals[0].strMealThumb;
+      $recipeBody.append(mealImgEl, mealEl, instrEl);
 
       // Array is here to store locally every time
       var recipe = [];
