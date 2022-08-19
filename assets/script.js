@@ -78,7 +78,7 @@ $userInputEl.keydown(function (evt) {
   }
 });
 
-function replaceCharacters() {
+function replaceCharacters(anime) {
   anime = $userInputEl.val().replace(" ", "-");
 }
 
@@ -104,6 +104,7 @@ function displaySuggestions() {
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
+        // add data tag to the div, imag, and h3
         var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
@@ -113,8 +114,17 @@ function displaySuggestions() {
 
         suggestionCard.append(suggestionImageEl, suggestionTitleEl);
         $animeCardBodySuggestions.append(suggestionCard);
+        suggestionCard.on("click", openAnimeSuggestion);
       }
     });
+}
+
+function openAnimeSuggestion(event) {
+  console.log(event.target);
+  var suggestionClicked = event.target.suggestionTitleEl.val();
+  replaceCharacters(suggestionClicked);
+  searchAnime(suggestionClicked);
+  randomRecipe();
 }
 
 // create a API fetch function for recipies
