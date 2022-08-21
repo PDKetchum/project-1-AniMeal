@@ -6,6 +6,9 @@ var $recipeBody = $("#recipe-body");
 var $recipeList = $("#recipe-list");
 var $recipeImg = $("#recipe-img");
 var $recipeName = $("#recipe-name");
+var $errorModal = $("#errorModal");
+var $closeButton = $("#error-modal-close-button");
+
 var anime;
 
 // Create a function that will fetch the API data from Jikan
@@ -27,20 +30,26 @@ function searchAnime(anime) {
     })
     .then(function (data) {
       console.log(data);
-      $animeCardBody.empty();
-      var title = data.data[0].title_english;
-      var synopsis = data.data[0].synopsis;
-      var poster = data.data[0].images.jpg.large_image_url;
+      if (data.data.length === 0) {
+        animeTitleError();
+      } else {
+        $animeCardBody.empty();
+        var title = data.data[0].title_english;
+        var synopsis = data.data[0].synopsis;
+        var poster = data.data[0].images.jpg.large_image_url;
 
-      var imageEl = $("<img>");
-      var titleEl = $("<h3>");
-      var synopsisEl = $("<p>");
+        var imageEl = $("<img>");
+        var titleEl = $("<h3>");
+        var synopsisEl = $("<p>");
 
-      titleEl.text(title);
-      synopsisEl.text(synopsis);
-      imageEl.attr("src", poster);
+        titleEl.text(title);
+        synopsisEl.text(synopsis);
+        imageEl.attr("src", poster);
 
-      $animeCardBody.append(imageEl, titleEl, synopsisEl);
+        $animeCardBody.append(imageEl, titleEl, synopsisEl);
+
+        savePastSearches(anime);
+      }
     });
 }
 
@@ -49,7 +58,6 @@ function printSearch() {
   replaceCharacters();
   searchAnime(anime);
   randomRecipe();
-  savePastSearches(anime);
 }
 
 $userInputEl.keydown(function (evt) {
@@ -80,7 +88,7 @@ function displaySuggestions() {
       console.log(data);
       $animeCardBody.empty();
 
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 10; i++) {
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
@@ -112,6 +120,7 @@ function randomRecipe() {
     })
     .then(function (data) {
       console.log(data);
+
       $recipeBody.empty();
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
@@ -127,6 +136,10 @@ function randomRecipe() {
       
 
       $recipeBody.append(mealImgEl, mealEl, instructions);
+
+      var mealTitle = data.meals[0].strMeal;
+      var instructions = data.meals[0].strInstructions;
+      var mealImg = data.meals[0].strMealThumb;
 
       // Array is here to store locally every time
       var recipe = [];
@@ -156,11 +169,21 @@ function saveRecentSearches(anime) {
   var recentSearches = localStorage.getItem("RecentSearches");
   if (recentSearches) {
     recentSearches = JSON.parse(recentSearches);
+function displayRecipe() {}
+
+// Create a function that will store recent saves
+function savePastSearches(anime) {
+  var search = anime.toUpperCase();
+  var searches = localStorage.getItem("searches");
+  if (searches) {
+    searches = JSON.parse(searches);
   } else {
     searches = [];
   }
 
-  searches.push(search);
+  if (!searches.includes(search)) {
+    searches.push(search);
+  }
 
   localStorage.setItem("searches", JSON.stringify(searches));
 }
@@ -178,3 +201,14 @@ function displayPastSearches() {
 }
 
 displayPastSearches();
+
+function animeTitleError() {
+  $errorModal.attr("class", "errorModalShow");
+}
+
+$closeButton.on("click", hideModal);
+
+function hideModal() {
+  $errorModal.attr("class", "errorModalHide");
+}}
+}
