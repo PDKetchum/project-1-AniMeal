@@ -163,13 +163,7 @@ function randomRecipe() {
     });
 }
 
-// Create a function that will store recent saves
-function saveRecentSearches(anime) {
-  var recentSearch = anime.toUpperCase();
-  var recentSearches = localStorage.getItem("RecentSearches");
-  if (recentSearches) {
-    recentSearches = JSON.parse(recentSearches);
-function displayRecipe() {}
+
 
 // Create a function that will store recent saves
 function savePastSearches(anime) {
