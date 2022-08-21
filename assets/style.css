@@ -1,6 +1,7 @@
 body {
   background-color: rgb(58, 58, 58);
   border: 5px solid black;
+  color: lightgrey;
 }
 
 header {
@@ -10,7 +11,7 @@ header {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   text-align: center;
-  border: 5px dashed rgb(47, 154, 255);
+  border: 1px solid lightgrey;
   margin: 10px;
   padding: 20px;
   font-size: xx-large;
@@ -19,7 +20,7 @@ header {
 h3,
 p,
 .search {
-  color: black;
+  color: lightslategrey;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
@@ -60,14 +61,20 @@ img {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  border: 5px solid red;
+  border: none;
   height: 544px;
-  width: 354px;
+  width: 354px; 
+  padding: 20px;
 }
 
-.recipe-list {
-  font-size: larger;
+#recipe-list {
+  font-size: large;
   font-family: Arial, Helvetica, sans-serif;
+  color: lightgrey;
+}
+
+#recipe-body {
+  color: lightgrey;
 }
 
 li {
