@@ -17,6 +17,15 @@ header {
   font-size: xx-large;
 }
 
+.title {
+  font-family: 'DynaPuff', cursive;
+  font-size: 60px;
+}
+
+.slogan {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 40px;
+}
 
 .search {
   color: lightslategrey;
