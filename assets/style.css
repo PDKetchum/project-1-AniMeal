@@ -33,6 +33,22 @@ header {
   text-align: center;
 }
 
+.searchTitle {
+  padding: 20px;
+}
+
+.searchP {
+  font-size: 20px;
+}
+
+.suggestionTitle {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 input,
 button {
   margin-bottom: 20px;
@@ -72,7 +88,7 @@ img {
   margin-right: auto;
   border: none;
   max-height: 450px;
-  max-width: 354px; 
+  max-width: 354px;
   padding: 20px;
 }
 
@@ -111,32 +127,6 @@ li {
 .link:hover {
   background-color: #2068f0;
 }
-
-/*testing drop down*/
-
-/* ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: crimson;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: rgb(83, 6, 22);
-} */
 
 footer {
   font-family: Arial, Helvetica, sans-serif;
