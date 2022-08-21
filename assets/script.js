@@ -17,8 +17,6 @@ var $closeButton = $("#error-modal-close-button");
 // sypnoisis
 // title
 
-// https://www.themealdb.com/api.php
-
 displaySuggestions();
 
 function searchAnime(anime) {
@@ -139,8 +137,7 @@ function openAnimeSuggestion(event) {
 // create elements for the recipie data to append to
 // append the recipe to html body
 
-// add image of random recipe
-
+// This is technically done but could be better
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
   console.log(mealUrl);
@@ -169,6 +166,7 @@ function randomRecipe() {
       mealEl.text(mealTitle);
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
+      
 
       recipeInfo.append(mealEl, instrEl);
       $recipeBody.append(mealImgEl, recipeInfo);
@@ -195,7 +193,7 @@ function randomRecipe() {
     });
 }
 
-function displayRecipe() {}
+
 
 // Create a function that will store recent saves
 function savePastSearches(anime) {
@@ -229,7 +227,7 @@ function displayPastSearches() {
 }
 
 displayPastSearches();
-// comment
+
 function animeTitleError() {
   $errorModal.attr("class", "errorModalShow");
 }
@@ -238,4 +236,5 @@ $closeButton.on("click", hideModal);
 
 function hideModal() {
   $errorModal.attr("class", "errorModalHide");
+}}
 }
