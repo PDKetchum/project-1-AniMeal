@@ -234,3 +234,5 @@ $closeButton.on("click", hideModal);
 function hideModal() {
   $errorModal.attr("class", "errorModalHide");
 }
+
+// fix
