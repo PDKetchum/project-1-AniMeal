@@ -42,6 +42,7 @@ button {
 button {
   border-radius: 15px;
   padding: 10px;
+  color: white;
   background: #6394ed;
   transition: 0.1s ease-in-out;
 }
