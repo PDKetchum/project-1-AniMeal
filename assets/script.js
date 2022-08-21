@@ -111,13 +111,18 @@ function displaySuggestions() {
         var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
-        suggestionImageEl.attr("class", "");
 
         suggestionTitleEl.text(suggestionTitle);
+        suggestionTitleEl.attr("data-title", suggestionTitle);
         suggestionImageEl.attr("src", suggestionPoster);
+        suggestionImageEl.attr("data-title", suggestionTitle);
+
+        suggestionCard.attr("data-title", suggestionTitle);
 
         suggestionCard.append(suggestionImageEl, suggestionTitleEl);
         $animeCardBodySuggestions.append(suggestionCard);
+        suggestionImageEl.on("click", openAnimeSuggestion);
+        suggestionTitleEl.on("click", openAnimeSuggestion);
         suggestionCard.on("click", openAnimeSuggestion);
       }
     });
@@ -125,7 +130,8 @@ function displaySuggestions() {
 
 function openAnimeSuggestion(event) {
   console.log(event.target);
-  var suggestionClicked = event.target.suggestionTitleEl.val();
+  var suggestionClicked = event.target.getAttribute("data-title");
+  console.log(suggestionClicked);
   replaceCharacters(suggestionClicked);
   searchAnime(suggestionClicked);
   randomRecipe();
@@ -157,17 +163,19 @@ function randomRecipe() {
       var mealImgEl = $("<img>");
       var recipeInfo = $("<div>");
       var instrEl = $("<p>");
-      var mealEl = $("<h1>");
+      var mealTitleEl = $("<h1>");
+      var mealIngredientsEl = $("<ul>");
 
       recipeInfo.attr("class", "col-span-2");
-      mealEl.attr("class", "font-bold text-4xl");
+      mealTitleEl.attr("class", "font-bold text-4xl");
       instrEl.attr("class", "text-3xl text-justify pr-12");
 
-      mealEl.text(mealTitle);
+      mealTitleEl.text(mealTitle);
+      mealIngredientsEl.text("Ingredients:");
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
 
-      recipeInfo.append(mealEl, instrEl);
+      recipeInfo.append(mealTitleEl, mealIngredientsEl, instrEl);
       $recipeBody.append(mealImgEl, recipeInfo);
 
       // Array is here to store locally every time
@@ -183,12 +191,16 @@ function randomRecipe() {
         if (meal[ingredients] != null && meal[ingredients].length != 0) {
           console.log(meal[ingredients], meal[measure]);
           recipe.push({
-            ingredient: meal[ingredients],
             measure: meal[measure],
+            ingredient: meal[ingredients],
           });
         }
       }
-      console.log(recipe);
+      for (var i = 0; i <= recipe.length; i++) {
+        var mealIngredients = $("<ul>");
+        mealIngredients.text(recipe[i].measure + " " + recipe[i].ingredient);
+        mealIngredientsEl.append(mealIngredients);
+      }
     });
 }
 
