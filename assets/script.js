@@ -166,7 +166,6 @@ function randomRecipe() {
       mealEl.text(mealTitle);
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
-      
 
       recipeInfo.append(mealEl, instrEl);
       $recipeBody.append(mealImgEl, recipeInfo);
@@ -192,8 +191,6 @@ function randomRecipe() {
       console.log(recipe);
     });
 }
-
-
 
 // Create a function that will store recent saves
 function savePastSearches(anime) {
@@ -236,5 +233,6 @@ $closeButton.on("click", hideModal);
 
 function hideModal() {
   $errorModal.attr("class", "errorModalHide");
-}}
 }
+
+// fix
