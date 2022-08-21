@@ -51,8 +51,8 @@ function searchAnime(anime) {
         var synopsisEl = $("<p>");
 
         info.attr("class", "col-span-2");
-        titleEl.attr("class", "font-bold text-4xl");
-        synopsisEl.attr("class", "text-3xl text-justify pr-12");
+        titleEl.attr("class", "font-bold text-4xl searchTitle");
+        synopsisEl.attr("class", "text-1xl text-justify pr-12");
 
         titleEl.text(title);
         synopsisEl.text(synopsis);
@@ -104,6 +104,7 @@ function displaySuggestions() {
 
       var topAnime = $("<h2>");
       topAnime.text("Top 10 Highest Rated Animes");
+      topAnime.attr("class", "font-bold text-4xl searchTitle");
       $("#topAnime").append(topAnime);
 
       for (var i = 0; i < 10; i++) {
@@ -117,6 +118,7 @@ function displaySuggestions() {
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionTitleEl.attr("data-title", suggestionTitle);
+        suggestionTitleEl.attr("class", "suggestionTitle");
         suggestionImageEl.attr("src", suggestionPoster);
         suggestionImageEl.attr("data-title", suggestionTitle);
 
@@ -167,7 +169,7 @@ function randomRecipe() {
 
       recipeInfo.attr("class", "col-span-2");
       mealTitleEl.attr("class", "font-bold text-4xl");
-      instrEl.attr("class", "text-3xl text-justify pr-12");
+      instrEl.attr("class", "text-1xl text-justify pr-12");
 
       mealTitleEl.text(mealTitle);
       mealIngredientsEl.text("Ingredients:");
