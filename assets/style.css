@@ -42,9 +42,11 @@ header {
 }
 
 .suggestionTitle {
-  color: lightslategrey;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 input,
@@ -142,3 +144,6 @@ footer {
 
 /* .anime-card-body {
 } */
+
+
+/* TEST */
