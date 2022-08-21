@@ -26,7 +26,6 @@ function searchAnime(anime) {
   }
 
   var animeUrl = "https://api.jikan.moe/v4/anime?q=" + anime;
-  console.log(animeUrl);
 
   fetch(animeUrl)
     .then(function (response) {
@@ -93,7 +92,6 @@ function replaceCharacters(anime) {
 
 function displaySuggestions() {
   var suggestionsUrl = "https://api.jikan.moe/v4/top/anime?page=1";
-  console.log(suggestionsUrl);
 
   fetch(suggestionsUrl)
     .then(function (response) {
@@ -129,9 +127,7 @@ function displaySuggestions() {
 }
 
 function openAnimeSuggestion(event) {
-  console.log(event.target);
   var suggestionClicked = event.target.getAttribute("data-title");
-  console.log(suggestionClicked);
   replaceCharacters(suggestionClicked);
   searchAnime(suggestionClicked);
 }
@@ -145,7 +141,6 @@ function openAnimeSuggestion(event) {
 // This is technically done but could be better
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
-  console.log(mealUrl);
 
   fetch(mealUrl)
     .then(function (response) {
@@ -180,7 +175,6 @@ function randomRecipe() {
       // Array is here to store locally every time
       var recipe = [];
 
-      console.log(data.meals[0]);
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
         var measure = "strMeasure" + i;
@@ -188,14 +182,13 @@ function randomRecipe() {
 
         // This gets rid of any empty sting/'null'
         if (meal[ingredients] != null && meal[ingredients].length != 0) {
-          console.log(meal[ingredients], meal[measure]);
           recipe.push({
             measure: meal[measure],
             ingredient: meal[ingredients],
           });
         }
       }
-      for (var i = 0; i <= recipe.length; i++) {
+      for (var i = 0; i < recipe.length; i++) {
         var mealIngredients = $("<ul>");
         mealIngredients.text(recipe[i].measure + " " + recipe[i].ingredient);
         mealIngredientsEl.append(mealIngredients);
@@ -223,10 +216,8 @@ function savePastSearches(anime) {
 // Create a function that will display recent searches when typing in the search bar
 function displayPastSearches() {
   var pastSearches = JSON.parse(localStorage.getItem("searches"));
-  console.log(pastSearches);
   $("#user-input").empty;
   $(function () {
-    console.log("inside");
     var availableTags = pastSearches;
     $("#user-input").autocomplete({
       source: availableTags,
