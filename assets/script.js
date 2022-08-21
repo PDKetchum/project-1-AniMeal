@@ -134,7 +134,6 @@ function openAnimeSuggestion(event) {
   console.log(suggestionClicked);
   replaceCharacters(suggestionClicked);
   searchAnime(suggestionClicked);
-  randomRecipe();
 }
 
 // create a API fetch function for recipies
