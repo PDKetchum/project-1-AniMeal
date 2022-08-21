@@ -36,6 +36,7 @@ function searchAnime(anime) {
       if (data.data.length === 0) {
         animeTitleError();
       } else {
+        $("#topAnime").empty();
         $animeCardBodySuggestions.empty();
         $animeCardBodySearch.empty();
 
@@ -100,6 +101,10 @@ function displaySuggestions() {
     .then(function (data) {
       console.log(data);
       $animeCardBodySuggestions.empty();
+
+      var topAnime = $("<h2>");
+      topAnime.text("Top 10 Highest Rated Animes");
+      $("#topAnime").append(topAnime);
 
       for (var i = 0; i < 10; i++) {
         var suggestionTitle = data.data[i].title_english;
