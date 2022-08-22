@@ -18,12 +18,12 @@ header {
 }
 
 .title {
-  font-family: 'DynaPuff', cursive;
+  font-family: "DynaPuff", cursive;
   font-size: 60px;
 }
 
 .slogan {
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
   font-size: 40px;
 }
 
@@ -33,16 +33,16 @@ header {
   text-align: center;
 }
 
-.searchTitle {
-  padding: 20px;
-}
-
 .searchP {
   font-size: 20px;
 }
 
+.video {
+  height: 480px;
+  width: 854px;
+}
+
 .suggestionTitle {
-  color: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   font-size: 25px;
@@ -79,17 +79,6 @@ input {
   color: white;
   margin: 0 0 8px 0;
   max-width: 90%;
-}
-
-img {
-  display: block;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border: none;
-  max-height: 450px;
-  max-width: 354px;
-  padding: 20px;
 }
 
 #recipe-list {
@@ -141,9 +130,3 @@ footer {
 .errorModalHide {
   display: none;
 }
-
-/* .anime-card-body {
-} */
-
-
-/* TEST */
