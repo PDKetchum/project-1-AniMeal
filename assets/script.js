@@ -117,11 +117,11 @@ function displaySuggestions() {
 
       // Page title
       var topAnime = $("<h2>");
-      topAnime.text("Top 10 Highest Scored Animes");
+      topAnime.text("Highest Scored Animes");
       topAnime.attr("class", "font-bold text-4xl p-6 m-8");
       $("#topAnime").append(topAnime);
 
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 12; i++) {
         // Retreiving data needed
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
@@ -168,13 +168,11 @@ function openAnimeSuggestion(event) {
   searchAnime(suggestionClicked);
 }
 
-
-
 // Random Recipe function and API
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-// API call to fetch random recipe
+  // API call to fetch random recipe
   fetch(mealUrl)
     .then(function (response) {
       return response.json();
@@ -182,48 +180,47 @@ function randomRecipe() {
     .then(function (data) {
       console.log(data);
 
-// This puts all data items into an array
+      // This puts all data items into an array
       $recipeBody.empty();
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
       var mealImg = data.meals[0].strMealThumb;
 
-// variables to display image and text from the API
+      // variables to display image and text from the API
       var mealImgEl = $("<img>");
       var recipeInfo = $("<div>");
       var instrEl = $("<p>");
       var mealTitleEl = $("<h1>");
       var mealIngredientsEl = $("<ul>");
 
-
       recipeInfo.attr("class", "col-span-2 mx-8");
 
-// styles the JQuery items listed above
+      // styles the JQuery items listed above
       recipeInfo.attr("class", "col-span-2");
 
       mealTitleEl.attr("class", "font-bold text-4xl");
       instrEl.attr("class", "text-1xl text-justify pr-12 max-w-6xl");
 
-// applying text and image to the JQuery variables above
+      // applying text and image to the JQuery variables above
       mealTitleEl.text(mealTitle);
       mealIngredientsEl.text("Ingredients:");
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
 
-// These append all recipe details to the page
+      // These append all recipe details to the page
       recipeInfo.append(mealTitleEl, mealIngredientsEl, instrEl);
       $recipeBody.append(mealImgEl, recipeInfo);
 
-// Array is here to store recipe locally every time
+      // Array is here to store recipe locally every time
       var recipe = [];
 
-// 
+      //
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
         var measure = "strMeasure" + i;
         var meal = data.meals[0];
 
-// This gets rid of any empty sting/'null'
+        // This gets rid of any empty sting/'null'
         if (meal[ingredients] != null && meal[ingredients].length != 0) {
           recipe.push({
             measure: meal[measure],
@@ -232,7 +229,7 @@ function randomRecipe() {
         }
       }
 
-// This displays recipe ingredients as a list with item and measurements
+      // This displays recipe ingredients as a list with item and measurements
       for (var i = 0; i < recipe.length; i++) {
         var mealIngredients = $("<ul>");
         mealIngredients.text(recipe[i].measure + " " + recipe[i].ingredient);
