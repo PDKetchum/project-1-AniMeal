@@ -43,22 +43,32 @@ function searchAnime(anime) {
         var title = data.data[0].title_english;
         var synopsis = data.data[0].synopsis;
         var poster = data.data[0].images.jpg.large_image_url;
+        var score = data.data[0].score;
+        var popularity = data.data[0].popularity;
+        var trailer = data.data[0].trailer.embed_url;
 
         var card = $("<div>");
         var info = $("<div>");
         var imageEl = $("<img>");
         var titleEl = $("<h3>");
+        var scoreEl = $("<p>");
+        var popularityEl = $("<p>");
         var synopsisEl = $("<p>");
+        var trailerEl = $("<iframe>");
 
         info.attr("class", "col-span-2");
         titleEl.attr("class", "font-bold text-4xl searchTitle");
         synopsisEl.attr("class", "text-1xl text-justify pr-12");
 
+        scoreEl.text("Score: " + score + "/10");
+        popularityEl.text("Popularity Ranking: " + popularity);
         titleEl.text(title);
         synopsisEl.text(synopsis);
         imageEl.attr("src", poster);
+        trailerEl.attr("src", trailer);
+        trailerEl.attr("class", "video");
 
-        info.append(titleEl, synopsisEl);
+        info.append(titleEl, scoreEl, popularityEl, synopsisEl, trailerEl);
         card.append(imageEl, info);
         $animeCardBodySearch.append(card, info);
 
@@ -103,7 +113,7 @@ function displaySuggestions() {
       $animeCardBodySuggestions.empty();
 
       var topAnime = $("<h2>");
-      topAnime.text("Top 10 Highest Rated Animes");
+      topAnime.text("Top 10 Highest Scored Animes");
       topAnime.attr("class", "font-bold text-4xl searchTitle");
       $("#topAnime").append(topAnime);
 
@@ -118,12 +128,18 @@ function displaySuggestions() {
 
         suggestionTitleEl.text(suggestionTitle);
         suggestionTitleEl.attr("data-title", suggestionTitle);
-        suggestionTitleEl.attr("class", "suggestionTitle");
+        suggestionTitleEl.attr(
+          "class",
+          "text-slate-400 font-semibold text-xl transition hover:text-gray-500 suggestionTitle"
+        );
         suggestionImageEl.attr("src", suggestionPoster);
         suggestionImageEl.attr("data-title", suggestionTitle);
 
         suggestionCard.attr("data-title", suggestionTitle);
-
+        suggestionCard.attr(
+          "class",
+          "card bg-zinc-800 w-80 h-[34rem] rounded-xl p-6 space-y-4"
+        );
         suggestionCard.append(suggestionImageEl, suggestionTitleEl);
         $animeCardBodySuggestions.append(suggestionCard);
         suggestionImageEl.on("click", openAnimeSuggestion);

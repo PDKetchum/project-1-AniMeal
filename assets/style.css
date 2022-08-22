@@ -18,12 +18,12 @@ header {
 }
 
 .title {
-  font-family: 'DynaPuff', cursive;
+  font-family: "DynaPuff", cursive;
   font-size: 60px;
 }
 
 .slogan {
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
   font-size: 40px;
 }
 
@@ -41,8 +41,12 @@ header {
   font-size: 20px;
 }
 
+.video {
+  height: 480px;
+  width: 854px;
+}
+
 .suggestionTitle {
-  color: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   font-size: 25px;
@@ -144,6 +148,5 @@ footer {
 
 /* .anime-card-body {
 } */
-
 
 /* TEST */
