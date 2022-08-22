@@ -49,26 +49,31 @@ function searchAnime(anime) {
 
         var card = $("<div>");
         var info = $("<div>");
+        var sub_title = $("<div>");
         var imageEl = $("<img>");
         var titleEl = $("<h3>");
-        var scoreEl = $("<p>");
-        var popularityEl = $("<p>");
+        var scoreEl = $("<span>");
+        var popularityEl = $("<span>");
         var synopsisEl = $("<p>");
         var trailerEl = $("<iframe>");
 
-        info.attr("class", "col-span-2");
-        titleEl.attr("class", "font-bold text-4xl searchTitle");
-        synopsisEl.attr("class", "text-1xl text-justify pr-12");
+        info.attr("class", "col-span-2 mt-8");
+        titleEl.attr("class", "font-bold text-4xl py-6 text-slate-50");
+        synopsisEl.attr("class", "text-1xl text-justify pr-12 p-3 max-w-6xl");
 
-        scoreEl.text("Score: " + score + "/10");
+        sub_title.attr("class", "p-3 font-semibold text-slate-50");
+        scoreEl.text("Score: ⭐ " + score + "/10");
+        scoreEl.attr("class", "pr-2.5");
         popularityEl.text("Popularity Ranking: " + popularity);
         titleEl.text(title);
-        synopsisEl.text(synopsis);
+        synopsisEl.text("Synopsis: " + synopsis);
         imageEl.attr("src", poster);
+        imageEl.attr("class", "mt-20 border-8 rounded-xl border-zinc-500");
         trailerEl.attr("src", trailer);
-        trailerEl.attr("class", "video");
+        trailerEl.attr("class", "video p-3");
 
-        info.append(titleEl, scoreEl, popularityEl, synopsisEl, trailerEl);
+        sub_title.append(scoreEl, popularityEl);
+        info.append(titleEl, sub_title, synopsisEl, trailerEl);
         card.append(imageEl, info);
         $animeCardBodySearch.append(card, info);
 
@@ -114,7 +119,7 @@ function displaySuggestions() {
 
       var topAnime = $("<h2>");
       topAnime.text("Top 10 Highest Scored Animes");
-      topAnime.attr("class", "font-bold text-4xl searchTitle");
+      topAnime.attr("class", "font-bold text-4xl p-6 m-8");
       $("#topAnime").append(topAnime);
 
       for (var i = 0; i < 10; i++) {
@@ -130,7 +135,7 @@ function displaySuggestions() {
         suggestionTitleEl.attr("data-title", suggestionTitle);
         suggestionTitleEl.attr(
           "class",
-          "text-slate-400 font-semibold text-xl transition hover:text-gray-500 suggestionTitle"
+          "text-slate-400 font-semibold text-xl transition hover:text-slate-300 suggestionTitle"
         );
         suggestionImageEl.attr("src", suggestionPoster);
         suggestionImageEl.attr("data-title", suggestionTitle);
@@ -138,7 +143,7 @@ function displaySuggestions() {
         suggestionCard.attr("data-title", suggestionTitle);
         suggestionCard.attr(
           "class",
-          "card bg-zinc-800 w-80 h-[34rem] rounded-xl p-6 space-y-4"
+          "card bg-zinc-800 w-80 h-[34rem] rounded-xl p-6 space-y-4 hover:bg-zinc-700 cursor-pointer"
         );
         suggestionCard.append(suggestionImageEl, suggestionTitleEl);
         $animeCardBodySuggestions.append(suggestionCard);
@@ -183,9 +188,9 @@ function randomRecipe() {
       var mealTitleEl = $("<h1>");
       var mealIngredientsEl = $("<ul>");
 
-      recipeInfo.attr("class", "col-span-2");
+      recipeInfo.attr("class", "col-span-2 mx-8");
       mealTitleEl.attr("class", "font-bold text-4xl");
-      instrEl.attr("class", "text-1xl text-justify pr-12");
+      instrEl.attr("class", "text-1xl text-justify pr-12 max-w-6xl");
 
       mealTitleEl.text(mealTitle);
       mealIngredientsEl.text("Ingredients:");

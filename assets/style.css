@@ -33,10 +33,6 @@ header {
   text-align: center;
 }
 
-.searchTitle {
-  padding: 20px;
-}
-
 .searchP {
   font-size: 20px;
 }
@@ -83,17 +79,6 @@ input {
   color: white;
   margin: 0 0 8px 0;
   max-width: 90%;
-}
-
-img {
-  display: block;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border: none;
-  max-height: 450px;
-  max-width: 354px;
-  padding: 20px;
 }
 
 #recipe-list {
