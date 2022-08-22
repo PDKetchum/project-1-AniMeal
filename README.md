@@ -22,4 +22,6 @@ Hosted: https://pdketchum.github.io/project-1-AniMeal/
 GitHub URL: https://github.com/PDKetchum/project-1-AniMeal
 
 ![](screenshot.png)
+
+![](screenshot2.png)
 _Screenshots of page_
