@@ -168,16 +168,13 @@ function openAnimeSuggestion(event) {
   searchAnime(suggestionClicked);
 }
 
-// create a API fetch function for recipies
-// have the recipies randomized
-// target the data info needed
-// create elements for the recipie data to append to
-// append the recipe to html body
 
-// This is technically done but could be better
+
+// Random Recipe function and API
 function randomRecipe() {
   var mealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
 
+// API call to fetch random recipe
   fetch(mealUrl)
     .then(function (response) {
       return response.json();
@@ -185,38 +182,48 @@ function randomRecipe() {
     .then(function (data) {
       console.log(data);
 
+// This puts all data items into an array
       $recipeBody.empty();
       var mealTitle = data.meals[0].strMeal;
       var instructions = data.meals[0].strInstructions;
       var mealImg = data.meals[0].strMealThumb;
 
+// variables to display image and text from the API
       var mealImgEl = $("<img>");
       var recipeInfo = $("<div>");
       var instrEl = $("<p>");
       var mealTitleEl = $("<h1>");
       var mealIngredientsEl = $("<ul>");
 
+
       recipeInfo.attr("class", "col-span-2 mx-8");
+
+// styles the JQuery items listed above
+      recipeInfo.attr("class", "col-span-2");
+
       mealTitleEl.attr("class", "font-bold text-4xl");
       instrEl.attr("class", "text-1xl text-justify pr-12 max-w-6xl");
 
+// applying text and image to the JQuery variables above
       mealTitleEl.text(mealTitle);
       mealIngredientsEl.text("Ingredients:");
       instrEl.text(instructions);
       mealImgEl.attr("src", mealImg);
 
+// These append all recipe details to the page
       recipeInfo.append(mealTitleEl, mealIngredientsEl, instrEl);
       $recipeBody.append(mealImgEl, recipeInfo);
 
-      // Array is here to store locally every time
+// Array is here to store recipe locally every time
       var recipe = [];
 
+// 
       for (var i = 1; i <= 20; i++) {
         var ingredients = "strIngredient" + i;
         var measure = "strMeasure" + i;
         var meal = data.meals[0];
 
-        // This gets rid of any empty sting/'null'
+// This gets rid of any empty sting/'null'
         if (meal[ingredients] != null && meal[ingredients].length != 0) {
           recipe.push({
             measure: meal[measure],
@@ -224,6 +231,8 @@ function randomRecipe() {
           });
         }
       }
+
+// This displays recipe ingredients as a list with item and measurements
       for (var i = 0; i < recipe.length; i++) {
         var mealIngredients = $("<ul>");
         mealIngredients.text(recipe[i].measure + " " + recipe[i].ingredient);
