@@ -1,4 +1,3 @@
-// // Create a search button
 var $searchButton = $("#search-button");
 var $animeCardBodySearch = $("#anime-card-body-search");
 var $animeCardBodySuggestions = $("#anime-card-body-suggestions");
@@ -10,15 +9,9 @@ var $recipeName = $("#recipe-name");
 var $errorModal = $("#errorModal");
 var $closeButton = $("#error-modal-close-button");
 
-// Create a function that will fetch the API data from Jikan
-// create a function that will display the search result
-// Included in the search card:
-// Image of Anime poster data - images - large image url
-// sypnoisis
-// title
-
 displaySuggestions();
 
+// API call to fetch anime data by passing through an anime name
 function searchAnime(anime) {
   if (!anime) {
     animeTitleError();
@@ -33,13 +26,16 @@ function searchAnime(anime) {
     })
     .then(function (data) {
       console.log(data);
+      // If there is not data alert with modal
       if (data.data.length === 0) {
         animeTitleError();
       } else {
+        // Clearing out the html
         $("#topAnime").empty();
         $animeCardBodySuggestions.empty();
         $animeCardBodySearch.empty();
 
+        // Retreiving data needed
         var title = data.data[0].title_english;
         var synopsis = data.data[0].synopsis;
         var poster = data.data[0].images.jpg.large_image_url;
@@ -47,6 +43,7 @@ function searchAnime(anime) {
         var popularity = data.data[0].popularity;
         var trailer = data.data[0].trailer.embed_url;
 
+        // Creating elements for HTML
         var card = $("<div>");
         var info = $("<div>");
         var sub_title = $("<div>");
@@ -57,21 +54,24 @@ function searchAnime(anime) {
         var synopsisEl = $("<p>");
         var trailerEl = $("<iframe>");
 
+        // Adding attribues to the elements
         info.attr("class", "col-span-2 mt-8");
         titleEl.attr("class", "font-bold text-4xl py-6 text-slate-50");
         synopsisEl.attr("class", "text-1xl text-justify pr-12 p-3 max-w-6xl");
-
         sub_title.attr("class", "p-3 font-semibold text-slate-50");
-        scoreEl.text("Score: ⭐ " + score + "/10");
         scoreEl.attr("class", "pr-2.5");
-        popularityEl.text("Popularity Ranking: " + popularity);
-        titleEl.text(title);
-        synopsisEl.text("Synopsis: " + synopsis);
         imageEl.attr("src", poster);
         imageEl.attr("class", "mt-20 border-8 rounded-xl border-zinc-500");
         trailerEl.attr("src", trailer);
         trailerEl.attr("class", "video p-3");
 
+        // Adding text to elements
+        scoreEl.text("Score: ⭐ " + score + "/10");
+        popularityEl.text("Popularity Ranking: " + popularity);
+        titleEl.text(title);
+        synopsisEl.text("Synopsis: " + synopsis);
+
+        // Appending elements to html/parents
         sub_title.append(scoreEl, popularityEl);
         info.append(titleEl, sub_title, synopsisEl, trailerEl);
         card.append(imageEl, info);
@@ -84,28 +84,26 @@ function searchAnime(anime) {
     });
 }
 
+// Event listener for search button
 $searchButton.on("click", printSearch);
 function printSearch() {
   var anime = replaceCharacters();
   searchAnime(anime);
 }
 
+// Event listener for the enter key
 $userInputEl.keydown(function (evt) {
   if (evt.keyCode === 13) {
     printSearch();
   }
 });
 
+// Changes spaces in user anime title input to '-'
 function replaceCharacters(anime) {
   return $userInputEl.val().replace(" ", "-");
 }
 
-// Create a function that displays 6 anime suggestions
-// Fetch from the Jikan API random
-// create a for loop that will grab 6 anime suggestions
-// in the for loop, create elements for a card for the anime info to append to
-// in the for loop append the anime card to the html body
-
+// API call to fetch top rated anime data
 function displaySuggestions() {
   var suggestionsUrl = "https://api.jikan.moe/v4/top/anime?page=1";
 
@@ -117,21 +115,26 @@ function displaySuggestions() {
       console.log(data);
       $animeCardBodySuggestions.empty();
 
+      // Page title
       var topAnime = $("<h2>");
       topAnime.text("Top 10 Highest Scored Animes");
       topAnime.attr("class", "font-bold text-4xl p-6 m-8");
       $("#topAnime").append(topAnime);
 
       for (var i = 0; i < 10; i++) {
+        // Retreiving data needed
         var suggestionTitle = data.data[i].title_english;
         var suggestionPoster = data.data[i].images.jpg.large_image_url;
 
-        // add data tag to the div, imag, and h3
+        // Creating elements for HTML
         var suggestionCard = $("<div>");
         var suggestionImageEl = $("<img>");
         var suggestionTitleEl = $("<h3>");
 
+        // Adding text to element
         suggestionTitleEl.text(suggestionTitle);
+
+        // Adding Sttributes for elements
         suggestionTitleEl.attr("data-title", suggestionTitle);
         suggestionTitleEl.attr(
           "class",
@@ -145,8 +148,12 @@ function displaySuggestions() {
           "class",
           "card bg-zinc-800 w-80 h-[34rem] rounded-xl p-6 space-y-4 hover:bg-zinc-700 cursor-pointer"
         );
+
+        // Appending elements to html/parents
         suggestionCard.append(suggestionImageEl, suggestionTitleEl);
         $animeCardBodySuggestions.append(suggestionCard);
+
+        // Event listeners for elements created
         suggestionImageEl.on("click", openAnimeSuggestion);
         suggestionTitleEl.on("click", openAnimeSuggestion);
         suggestionCard.on("click", openAnimeSuggestion);
@@ -154,6 +161,7 @@ function displaySuggestions() {
     });
 }
 
+// Function to open up suggested animes data when clicked
 function openAnimeSuggestion(event) {
   var suggestionClicked = event.target.getAttribute("data-title");
   replaceCharacters(suggestionClicked);
@@ -224,7 +232,7 @@ function randomRecipe() {
     });
 }
 
-// Create a function that will store recent saves
+// Function that stores past searches
 function savePastSearches(anime) {
   var search = anime;
   var searches = localStorage.getItem("searches");
@@ -233,7 +241,7 @@ function savePastSearches(anime) {
   } else {
     searches = [];
   }
-
+  // Prevents duplicates
   if (!searches.includes(search)) {
     searches.push(search);
   }
@@ -241,7 +249,7 @@ function savePastSearches(anime) {
   localStorage.setItem("searches", JSON.stringify(searches));
 }
 
-// Create a function that will display recent searches when typing in the search bar
+// Function that will displays past searches when typing in the search bar
 function displayPastSearches() {
   var pastSearches = JSON.parse(localStorage.getItem("searches"));
   $("#user-input").empty;
@@ -255,6 +263,7 @@ function displayPastSearches() {
 
 displayPastSearches();
 
+// Shows and hides error modal
 function animeTitleError() {
   $errorModal.attr("class", "errorModalShow");
 }
@@ -264,5 +273,3 @@ $closeButton.on("click", hideModal);
 function hideModal() {
   $errorModal.attr("class", "errorModalHide");
 }
-
-// fix
