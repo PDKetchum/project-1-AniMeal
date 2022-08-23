@@ -1,6 +1,6 @@
 # project-1-AniMeal
 
-## Overview
+## Overview:
 
 Our application is an Anime database that allows the user to search an Anime from the title. The application then returns a description of the Anime and gives the user a random recipe in pair with the film. We often have known what Anime film we wanted to watch, however, we as a team rarely know what we want to eat. So we thought about creating an app that shows us what to eat while we watch our current favorite Anime.
 
@@ -16,6 +16,17 @@ As a hungry anime fan // I want to be able to search anime and be suggested reci
 
 - Type in a anime name
 - Click "Search"
+
+## API used:
+
+- https://docs.api.jikan.moe/
+- https://www.themealdb.com/api.php
+
+## Authors:
+
+- PDKetchum - https://github.com/PDKetchum
+- s1eepyghost - https://github.com/s1eepyghost
+- Emillpointer - https://github.com/Emillpointer
 
 Hosted: https://pdketchum.github.io/project-1-AniMeal/
 
